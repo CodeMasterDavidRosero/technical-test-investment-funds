@@ -1,0 +1,27 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  # NoSQL config (80% of the challenge)
+  data:
+    mongodb:
+      # Requiere URI válida (Atlas). Sin valor, la app fallará al arrancar.
+      uri: ${MONGODB_URI}
+
+app:
+  initial-balance: 500000
+  notifications:
+    enabled: true
+    channels:
+      - email
+      - sms
+
+---
+# Perfil que sólo usa Mongo (evita fallo de JPA si no hay Postgres en cloud-nosql)
+spring:
+  config:
+    activate:
+      on-profile: cloud-nosql
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration

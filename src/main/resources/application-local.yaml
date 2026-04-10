@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test_fund_db
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_sql_db
+    username: app_user
+    password: app_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  initial-balance: 500000
+  notifications:
+    enabled: true
+    channels:
+      - email
+      - sms
